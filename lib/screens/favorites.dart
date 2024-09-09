@@ -1,32 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:hyrule/controllers/api_controller.dart';
+import 'package:hyrule/controllers/dao_controller.dart';
 import 'package:hyrule/screens/components/entry_card.dart';
-import 'package:hyrule/screens/favorites.dart';
-import 'package:hyrule/utils/consts/categories.dart';
 
-class Results extends StatelessWidget {
-  Results({
+class Favorites extends StatelessWidget {
+  Favorites({
     Key? key,
-    required this.category,
   }) : super(key: key);
 
-  final String category;
-  final ApiController apiController = ApiController();
-
+final DaoController daoController = DaoController();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text(categories[category]!),
-          actions: [
-            IconButton(onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Favorites(),),);
-            }, icon: const Icon(Icons.bookmark),),
-          ],
+          title: const Text("Itens salvos"),
         ),
         body: FutureBuilder(
-            future: apiController.getEntriesByCategory(category: category),
+            future: daoController.getSavedEntries(),
             builder: (context, snapshot) {
               switch (snapshot.connectionState) {
                 case ConnectionState.active:
@@ -39,10 +29,9 @@ class Results extends StatelessWidget {
                   if (snapshot.hasData) {
                     return ListView.builder(
                       itemBuilder: (context, index) => EntryCard(
-                        entry: snapshot.data![index],
-                        isSaved: false,
+                        entry: snapshot.data![index],isSaved: true,
                       ),
-                        itemCount: snapshot.data!.length,
+                      itemCount: snapshot.data!.length,
                     );
                   }
 
