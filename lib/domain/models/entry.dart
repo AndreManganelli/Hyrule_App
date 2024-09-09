@@ -28,7 +28,7 @@ class Entry {
       'name': name,
       'image': image,
       'description': description,
-      'commonLocations': commonLocations,
+      'common_locations': commonLocations,
       'category': category,
     };
   }
@@ -39,7 +39,7 @@ class Entry {
       name: map['name'] as String,
       image: map['image'] as String,
       description: map['description'] as String,
-      commonLocations: jsonEncode(map['commonLocations'] ?? ['Sem localização']),
+      commonLocations: jsonEncode(map['common_locations'] ?? ['Sem localização']),
       category: map['category'] as String,
     );
   }
