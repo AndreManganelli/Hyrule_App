@@ -19,14 +19,19 @@ class Categories extends StatelessWidget {
             }, icon: const Icon(Icons.bookmark),),
           ],
         ),
-        body: GridView(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            crossAxisSpacing: 16,
-            mainAxisSpacing: 16,
+        body: Padding(
+          padding: const EdgeInsets.all(17.0),
+          child: GridView(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 16,
+              mainAxisSpacing: 16,
+              mainAxisExtent: 193,
+            ),
+            children: 
+              categories.keys.map((e) => Category(category: e)).toList()
+            ,
           ),
-          children: 
-          categories.keys.map((e) => Category(category: e)).toList(),
         ),
       ),
     );
